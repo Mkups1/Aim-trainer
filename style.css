@@ -1,0 +1,17 @@
+#canvas{
+    border:10px solid grey;
+    background:white;
+}
+body{
+    text-align:center;
+    background:#add8e6;
+}
+p{
+    font-size:25px;
+}
+button{
+    background:black;
+    color:white;
+    font-size:32px;
+    width: 150px;
+}
