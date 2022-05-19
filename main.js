@@ -8,6 +8,8 @@ let change = 0
 let number3 = document.getElementById("number-3")
 let number2 = document.getElementById("number-2")
 let number1 = document.getElementById("number-1")
+let targetX = 600
+let targetY = 300
 
 // Draw start screen
 ctx.fillStyle="black"
@@ -18,17 +20,16 @@ ctx.fillText("To start, press the start button", 425, 600)
 
 
 // When you click the start button, start the game
-document.getElementById("button").addEventListener("click", () => {
-    start()
-    
-}) 
-
+document.getElementById("button").addEventListener("click", start)
 
 
 function start(){
-    setInterval(start, 1000)
+    if (change <= 4) {
+        setTimeout(start, 1000)
         change++
-    
+    } else {
+        change = 0
+    }
     if(change === 1){
         ctx.fillStyle = "white"
         ctx.fillRect(0, 0, 1250, 655)
@@ -44,13 +45,26 @@ function start(){
         ctx.fillRect(0, 0, 1250, 655)
         ctx.drawImage(number1, 375, 25)
     } 
-    if(change === 5){
-        ctx.fillStyle = "white"
-        ctx.fillRect(0, 0, 1250, 655)
-        ctx.fillStyle = "Blue"
-        ctx.fillRect(600, 300, 50, 50)
-    }
-
+    // if(change === 4){
+    //     ctx.fillStyle = "white"
+    //     ctx.fillRect(0, 0, 1250, 655)
+    //     ctx.fillStyle = "Blue"
+    //     ctx.fillRect(targetX, targetY, 50, 50)
+    // }
 }
 
 document.addEventListener("mousedown", hit)
+
+requestAnimationFrame(hit)
+function hit(event){
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, 1250, 655)
+    if(event.x - cnv.getBoundingClientRect().x  >= targetX && event.x - cnv.getBoundingClientRect().x <= targetX + 50 && event.y - cnv.getBoundingClientRect().y >= targetY && event.y - cnv.getBoundingClientRect().y <= targetY + 50){
+        targetX = (Math.random * 1250)
+        targetY = (Math.random * 655)
+        ctx.fillStyle = "Blue"
+        ctx.fillRect(targetX, targetY, 50, 50)
+    
+    }
+    requestAnimationFrame(hit)
+}
