@@ -19,17 +19,19 @@ ctx.font = "30px Arial"
 ctx.fillText("To start, press the start button", 425, 600)
 
 
+
 // When you click the start button, start the game
 document.getElementById("button").addEventListener("click", start)
 
 
 function start(){
-    if (change <= 4) {
+    // if (change <= 4) {
         setTimeout(start, 1000)
         change++
-    } else {
-        change = 0
-    }
+        console.log("change")
+    // } else {
+    //     change = 0
+    // }
     if(change === 1){
         ctx.fillStyle = "white"
         ctx.fillRect(0, 0, 1250, 655)
@@ -45,20 +47,19 @@ function start(){
         ctx.fillRect(0, 0, 1250, 655)
         ctx.drawImage(number1, 375, 25)
     } 
-    // if(change === 4){
-    //     ctx.fillStyle = "white"
-    //     ctx.fillRect(0, 0, 1250, 655)
-    //     ctx.fillStyle = "Blue"
-    //     ctx.fillRect(targetX, targetY, 50, 50)
-    // }
+
+    if (change > 3) {
+        hit()
+    }
+
 }
 
 document.addEventListener("mousedown", hit)
 
-requestAnimationFrame(hit)
 function hit(event){
     ctx.fillStyle = "white"
     ctx.fillRect(0, 0, 1250, 655)
+    // console.log (event.x)
     if(event.x - cnv.getBoundingClientRect().x  >= targetX && event.x - cnv.getBoundingClientRect().x <= targetX + 50 && event.y - cnv.getBoundingClientRect().y >= targetY && event.y - cnv.getBoundingClientRect().y <= targetY + 50){
         targetX = (Math.random * 1250)
         targetY = (Math.random * 655)
@@ -66,5 +67,5 @@ function hit(event){
         ctx.fillRect(targetX, targetY, 50, 50)
     
     }
-    requestAnimationFrame(hit)
+
 }
