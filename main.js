@@ -8,6 +8,8 @@ let change = 0
 let number3 = document.getElementById("number-3")
 let number2 = document.getElementById("number-2")
 let number1 = document.getElementById("number-1")
+let scoreEl = document.getElementById("score")
+let score = 0
 let targetX = 600
 let targetY = 300
 
@@ -46,26 +48,31 @@ function start(){
         ctx.fillStyle = "white"
         ctx.fillRect(0, 0, 1250, 655)
         ctx.drawImage(number1, 375, 25)
-    } 
 
-    if (change > 3) {
-        hit()
+    } 
+    if(change === 4){
+        ctx.fillStyle = "white"
+        ctx.fillRect(0, 0, 1250, 655)
+        ctx.fillStyle = "Blue"
+        ctx.fillRect(targetX, targetY, 50, 50)
+        document.addEventListener("mousedown", hit)
     }
+
 
 }
 
-document.addEventListener("mousedown", hit)
 
 function hit(event){
-    ctx.fillStyle = "white"
-    ctx.fillRect(0, 0, 1250, 655)
-    // console.log (event.x)
+    console.log (score)
     if(event.x - cnv.getBoundingClientRect().x  >= targetX && event.x - cnv.getBoundingClientRect().x <= targetX + 50 && event.y - cnv.getBoundingClientRect().y >= targetY && event.y - cnv.getBoundingClientRect().y <= targetY + 50){
-        targetX = (Math.random * 1250)
-        targetY = (Math.random * 655)
+        ctx.fillStyle = "white"
+        ctx.fillRect(0, 0, 1250, 655)
+        targetX = (Math.random() * 1250)
+        targetY = (Math.random() * 655)
+        score++
+        scoreEl.innerHTML = score
         ctx.fillStyle = "Blue"
         ctx.fillRect(targetX, targetY, 50, 50)
-    
     }
 
 }
