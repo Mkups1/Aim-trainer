@@ -14,6 +14,7 @@ let timeEl = document.getElementById("time")
 let time = 60
 let targetX = 1600
 let targetY = 1300
+let interval
 
 // Draw start screen
 ctx.fillStyle="black"
@@ -35,7 +36,7 @@ function start(){
     console.log(change)
     ctx.fillStyle = "white"
     ctx.fillRect(0, 0, 1250, 655)
-    clearInterval(setInterval(timeF, 1000))
+    clearInterval(interval)
     if(change === 1){
         change++
         ctx.drawImage(number3, 375, 25)
@@ -57,7 +58,7 @@ function start(){
         console.log(targetX, targetY)
         ctx.fillRect(targetX, targetY, 50, 50)
         document.addEventListener("mousedown", hit)
-        setInterval(timeF, 1000)
+        interval = setInterval(timeF, 1000)
     } 
     
 
@@ -81,7 +82,7 @@ function hit(event){
 }
 
 function timeF(){
-    if(time <= 60 && time >=1)
+    if(time <= 60 && time >=0)
     time--
     timeEl.innerHTML = time
     console.log(time)
@@ -96,5 +97,8 @@ function timeF(){
         ctx.fillText("Congratulations!", 90, 300)
         ctx.font = "100px Arial"
         ctx.fillText("Your score:" + score, 300, 500)
+    }
+    if (time <= 0){
+        
     }
 }
