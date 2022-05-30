@@ -12,8 +12,8 @@ let scoreEl = document.getElementById("score")
 let score = 0
 let timeEl = document.getElementById("time")
 let time = 60
-let targetX = 600
-let targetY = 300
+let targetX = 1600
+let targetY = 1300
 
 // Draw start screen
 ctx.fillStyle="black"
@@ -28,15 +28,14 @@ ctx.fillText("To start, press the start button", 425, 600)
 document.getElementById("button").addEventListener("click", () => {
     change = 1
     score = 0
-    time = 60
+
     start()
 })
-
-
 function start(){
     console.log(change)
     ctx.fillStyle = "white"
     ctx.fillRect(0, 0, 1250, 655)
+    clearInterval(setInterval(timeF, 1000))
     if(change === 1){
         change++
         ctx.drawImage(number3, 375, 25)
@@ -50,12 +49,17 @@ function start(){
         ctx.drawImage(number1, 375, 25)
         setTimeout(start, 1000)
     } else if (change === 4){
-        // change = 0
+        change = 0
+        time = 60
         ctx.fillStyle = "Blue"
+        targetX -= 1000
+        targetY -= 1000
+        console.log(targetX, targetY)
         ctx.fillRect(targetX, targetY, 50, 50)
         document.addEventListener("mousedown", hit)
         setInterval(timeF, 1000)
     } 
+    
 
 }
 
@@ -82,8 +86,9 @@ function timeF(){
     timeEl.innerHTML = time
     console.log(time)
     if (time === 0){
-        targetX += 100000
-        targetY += 100000
+        targetX += 1000
+        targetY += 1000
+        console.log(targetX, targetY)
         ctx.fillStyle = "white"
         ctx.fillRect(0, 0, 1250, 655)
         ctx.fillStyle="black"
