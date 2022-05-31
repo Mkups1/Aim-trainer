@@ -60,14 +60,17 @@ function start(){
         document.addEventListener("mousedown", hit)
         interval = setInterval(timeF, 1000)
     } 
-    
+    if (change === 4 && time <= 59 && time >= 0){
+        targetX += 1000
+        targetY += 1000
+        console.log(targetX, targetY)
+    }
 
 }
 
 
 
 function hit(event){
-    console.log (score)
     if(event.x - cnv.getBoundingClientRect().x  >= targetX && event.x - cnv.getBoundingClientRect().x <= targetX + 50 && event.y - cnv.getBoundingClientRect().y >= targetY && event.y - cnv.getBoundingClientRect().y <= targetY + 50){
         ctx.fillStyle = "white"
         ctx.fillRect(0, 0, 1250, 655)
@@ -99,6 +102,6 @@ function timeF(){
         ctx.fillText("Your score:" + score, 300, 500)
     }
     if (time <= 0){
-        
+        timeEl.innerHTML = 0
     }
 }
